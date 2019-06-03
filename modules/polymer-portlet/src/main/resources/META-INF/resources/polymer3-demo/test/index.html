@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Tests</title>
+
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+    <script src="./test-suites.js"></script>
+  </head>
+  <body>
+    <script>
+      WCT.loadSuites(
+        window.VaadinPolymerStarterSuites
+          .reduce(function(suites, suite) {
+            return suites.concat([suite, `${suite}?wc-shadydom=true`]);
+          }, [])
+      );
+    </script>
+  </body>
+</html>

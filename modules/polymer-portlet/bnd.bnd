@@ -1,0 +1,4 @@
+Bundle-Name: polymer-portlet
+Bundle-SymbolicName: polymer-portlet
+Bundle-Version: 1.0.0
+Export-Package: org.apifusion.liferay_polymer.constants

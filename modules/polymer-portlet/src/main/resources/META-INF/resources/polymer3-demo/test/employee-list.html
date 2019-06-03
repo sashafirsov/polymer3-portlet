@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <base href="/">
+
+    <title>employee-list</title>
+
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js" type="module"></script>
+
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <employee-list></employee-list>
+      </template>
+    </test-fixture>
+
+    <script type="module">
+      import '../src/views/employee-list.js';
+
+      suite('employee-list tests', () => {
+        let home, ajax, grid;
+
+        setup(() => {
+          home = fixture('basic');
+          const domRoot = home.shadowRoot;
+          ajax = domRoot.querySelector('iron-ajax');
+          grid = domRoot.querySelector('vaadin-grid');
+        });
+
+        suite('grid', () => {
+          setup(done => {
+            // Wait for the response if necessary
+            if (ajax.lastResponse === undefined) {
+              ajax.addEventListener('response', () => done());
+            } else {
+              done();
+            }
+          });
+
+          test('has all employees', () => {
+            assert.equal(grid.items.length, home._employees.length);
+          });
+
+          test('has filtered employees after filter change', () => {
+            const filter = grid.querySelector('vaadin-text-field');
+            filter.value = 'Aiden';
+
+            const uniqueNamesInGrid = grid.items
+              .filter(item => item.firstName.indexOf(filter.value) > -1)
+              .map(item => item.firstName);
+
+            assert.sameMembers(uniqueNamesInGrid, [filter.value]);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
