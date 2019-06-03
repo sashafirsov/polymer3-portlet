@@ -56,10 +56,10 @@ class Polymer3DemoApp extends PolymerElement {
           <app-toolbar>Menu</app-toolbar>
           <vaadin-list-box selected="{{selected}}">
             <vaadin-item>
-              <a href="/employee-list">Employee list</a>
+              <a href="./employee-list">Employee list</a>
             </vaadin-item>
             <vaadin-item>
-              <a href="/employee-new">New employee</a>
+              <a href="./employee-new">New employee</a>
             </vaadin-item>
           </vaadin-list-box>
         </app-drawer>
