@@ -16,7 +16,7 @@ export function init(outlet) {
       }
     },
     {
-      path: NEW_EMPLOYEE,
+      path: '(.*)/'+NEW_EMPLOYEE,
       component: 'employee-new',
       action: () => {
         import('../views/employee-new.js');
@@ -24,10 +24,17 @@ export function init(outlet) {
     },
     {
       path: '(.*)',
-      component: 'app-404',
+      component: 'employee-list',
       action: () => {
-        import('../views/404.js');
+        import('../views/employee-list.js');
       }
     }
+    // {
+    //   path: '(.*)',
+    //   component: 'app-404',
+    //   action: () => {
+    //     import('../views/404.js');
+    //   }
+    // }
   ]);
 }

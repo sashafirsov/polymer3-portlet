@@ -50,10 +50,6 @@ class Polymer3DemoApp extends PolymerElement {
         }
       </style>
 
-      <app-drawer-layout fullbleed narrow="{{narrow}}">
-        <!-- Drawer content -->
-        <app-drawer slot="drawer" swipe-open="[[narrow]]">
-          <app-toolbar>Menu</app-toolbar>
           <vaadin-list-box selected="{{selected}}">
             <vaadin-item>
               <a href="./employee-list">Employee list</a>
@@ -62,23 +58,11 @@ class Polymer3DemoApp extends PolymerElement {
               <a href="./employee-new">New employee</a>
             </vaadin-item>
           </vaadin-list-box>
-        </app-drawer>
 
         <!-- Main content -->
-        <app-header-layout>
-          <app-header slot="header">
-            <app-toolbar>
-              <vaadin-button theme="icon" hidden$="[[!narrow]]" aria-label="Toggle menu" drawer-toggle>
-                <iron-icon icon="lumo:menu"></iron-icon>
-              </vaadin-button>
-              <div main-title>polymer3-demo-app</div>
-            </app-toolbar>
-          </app-header>
           <main>
             <!-- view content -->
           </main>
-        </app-header-layout>
-      </app-drawer-layout>
     `;
   }
 
@@ -117,16 +101,9 @@ class Polymer3DemoApp extends PolymerElement {
   }
 
   __onRouteChanged(e) {
-    switch (e.detail.location.pathname) {
-      case EMPLOYEE_LIST:
-        this.selected = 0;
-        break;
-      case NEW_EMPLOYEE:
-        this.selected = 1;
-        break;
-      default:
-        this.selected = null;
-    }
+    if( e.detail.location.pathname.endsWith(NEW_EMPLOYEE) )
+      return this.selected = 1;
+    this.selected = 0;
   }
 }
 
