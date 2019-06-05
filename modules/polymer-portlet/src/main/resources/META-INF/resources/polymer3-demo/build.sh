@@ -1,11 +1,10 @@
 polymer build
 replacef(){
-#    replace-in-file $1 $2 $3
-    replace-in-file $1 $2 $3 --verbose --isRegex
+    replace-in-file "$1" "$2" "$3" --verbose --isRegex
 }
 applyRootPath(){
-    echo "$1"
     rootPath="/o/polymer-portlet/polymer3-demo/build/$1/"
+    # echo "========== rootPath: '${rootPath}'"
     indexHtml="build/$1/index.html"
     replacef "/\<base(.*?)\>/g" " "                                              $indexHtml
     replacef "/rootPath:(.*?)[\'\"]/[\'\"]/g" "rootPath: '${rootPath}'"          $indexHtml
