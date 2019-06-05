@@ -12,3 +12,5 @@ In IntelliJ it is available in "Liferay" context menu on project level.
     * follow [README.md](modules/polymer-portlet/src/main/resources/META-INF/resources/polymer3-demo) "Setup" and "Build" instructions 
 * run gradle `deploy` task
 * run portal and insert into page `Polymer demo portlet` portlet
+
+[Blog on design of this project](https://blog.firsov.net/2019/06/liferay-polymer-integration.html)
