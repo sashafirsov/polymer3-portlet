@@ -22,9 +22,8 @@
   ],
   "builds": [
     {
-      "name": "esm-unbundled",
-      "basePath": "/build/esm-unbundled",
-      "basePath1": "/o/polymer-portlet/polymer3-demo/build/esm-unbundled",
+      "name": "esm-bundled",
+      "basePath": "/o/polymer-portlet/polymer3-demo/build/esm-bundled",
       "browserCapabilities": [
         "es2015",
         "modules"
@@ -38,8 +37,64 @@
       "html": {
         "minify": true
       },
+      "bundle": true,
+      "addServiceWorker": true
+    },
+    {
+      "name": "esm-unbundled",
+      "basePath": "/o/polymer-portlet/polymer3-demo/build/esm-bundled",
+      "browserCapabilities": [
+        "es2015",
+        "modules"
+      ],
+      "js": {
+        "minify": false
+      },
+      "css": {
+        "minify": false
+      },
+      "html": {
+        "minify": false
+      },
       "bundle": false,
-      "addServiceWorker": false
+      "addServiceWorker": true
+    },
+    {
+      "name": "es6-bundled",
+      "basePath": "/o/polymer-portlet/polymer3-demo/build/es6-bundled",
+      "browserCapabilities": [
+        "es2015"
+      ],
+      "js": {
+        "compile": "es2015",
+        "minify": true,
+        "transformModulesToAmd": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": true,
+      "addServiceWorker": true
+    },
+    {
+      "name": "es5-bundled",
+      "basePath": "/o/polymer-portlet/polymer3-demo/build/es5-bundled",
+      "js": {
+        "compile": "es5",
+        "minify": true,
+        "transformModulesToAmd": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": true,
+      "addServiceWorker": true
     }
   ],
   "moduleResolution": "node",

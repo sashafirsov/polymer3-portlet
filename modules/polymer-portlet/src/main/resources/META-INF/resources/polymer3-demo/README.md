@@ -34,7 +34,7 @@ This command builds your Polymer application for production and generates servic
 
 You can configure your `polymer.json` file to create multiple builds. You can define your own named builds, or use presets. See the Polymer's documentation on [building your project for production](https://www.polymer-project.org/3.0/toolbox/build-for-production) for more information.
 
-    $ polymer build
+    $ npm run build
 
 ### Run tests
 

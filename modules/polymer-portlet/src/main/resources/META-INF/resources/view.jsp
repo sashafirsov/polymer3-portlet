@@ -3,6 +3,8 @@
 <%@ page import="com.liferay.portal.kernel.util.SessionParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.theme.ThemeDisplay" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%
 	String browser = BrowserSnifferUtil.getBrowserId(request);
 	float version = BrowserSnifferUtil.getMajorVersion(request);
@@ -23,11 +25,13 @@
 			;
 	String jsProfile = (hasModule && hasWebComponent) ? "esm-bundled" : hasWebComponent? "es6-bundled": "es5-bundled";
 
-	boolean themeJsFastLoad = SessionParamUtil.getBoolean( request, "js_fast_load", false );
-	if( themeJsFastLoad && hasModule && hasWebComponent )
+	boolean themeJsFastLoad = themeDisplay.isThemeJsFastLoad();// SessionParamUtil.getBoolean( request, "js_fast_load", false );
+	if( !themeJsFastLoad && hasModule && hasWebComponent )
 		jsProfile = "esm-unbundled";
-
-jsProfile = "es6-bundled";
+//	HttpServletRequest sr = PortalUtil.getHttpServletRequest( themeDisplay.getportletRequest);
+	String jsBundle = ParamUtil.getString(PortalUtil.getOriginalServletRequest(request), "jsBundle");
+	if( null!= jsBundle && jsBundle.length()>0 )
+		jsProfile = jsBundle;
 
 
 %>
@@ -39,16 +43,20 @@ jsProfile = "es6-bundled";
 	<b><liferay-ui:message key="polymer.caption"/></b>
 	<img  src="<%= request.getContextPath() %>/image/logoLiferay.svg" />
 </p>
-Browser: <%=browser%> <%=version%> <%=isWebkit?"Webkit":""%> <%=isSafari?"Safari":""%>
-selected bundle: <%=jsProfile%>
+Browser: <%=browser%> <%=version%> <%=isWebkit?"Webkit":""%> <%=isSafari?"Safari":""%> &bull;
+Selected bundle: <b><%=jsProfile%></b>
+| <a href="./?jsBundle=esm-unbundled">esm-unbundled</a>
+| <a href="./?jsBundle=esm-bundled">esm-bundled</a>
+| <a href="./?jsBundle=es6-bundled">es6-bundled</a>
+| <a href="./?jsBundle=es5-bundled">es5-bundled</a>
+&bull; Debug: <a href="./?js_fast_load=0&css_fast_load=0&strip=0">js_fast_load=0</a>
 <%
 	String currentURL = themeDisplay.getURLCurrent();
 %>
 <%--<base href="<%=currentURL%>"/>--%>
-<%--<jsp:include page="/polymer3-demo/build/${ jsProfile }/index.html" flush="true" />--%>
-<%--<jsp:include page="/polymer3-demo/build/<%= jsProfile %>/index.html" flush="true" />--%>
-<%--<jsp:include page="/polymer3-demo/build/esm-unbundled/index.html" />--%>
-<%--
+<%--<j sp:include page="/polymer3-demo/build/${ jsProfile }/index.html" flush="true" />--%>
+<%--<j sp:include page="/polymer3-demo/build/<%= jsProfile %>/index.html" flush="true" />--%>
+
 <% if("esm-unbundled".equals(jsProfile) ) { %>1
 <jsp:include page="/polymer3-demo/build/esm-unbundled/index.html" />
 <% }%>
@@ -61,7 +69,6 @@ selected bundle: <%=jsProfile%>
 <% if("es5-bundled".equals(jsProfile) ) { %>4
 <jsp:include page="/polymer3-demo/build/es5-bundled/index.html" />
 <% }%>
---%>
 <%--<base href="<%=currentURL%>"/>--%>
 
-<jsp:include page="/polymer3-demo/build/es6-bundled/index.jsp" />
+<%--<jsp:include page="/polymer3-demo/build/es6-bundled/index.html" />--%>

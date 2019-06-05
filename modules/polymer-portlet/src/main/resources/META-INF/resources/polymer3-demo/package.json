@@ -42,6 +42,6 @@
     "postinstall": "npm dedupe",
     "lint": "polymer lint --rules polymer-3",
     "test": "polymer test --npm",
-    "build": "build.sh"
+    "build": "bash build.sh"
   }
 }
