@@ -71,8 +71,8 @@ class Polymer3DemoApp extends PolymerElement {
   }
 
   static get properties() {
-    return {
-      selected: Number
+    return {  selected: Number
+           ,  rootPath: { type:String, value:'' }
     };
   }
 

@@ -50,25 +50,14 @@ Selected bundle: <b><%=jsProfile%></b>
 | <a href="./?jsBundle=es6-bundled">es6-bundled</a>
 | <a href="./?jsBundle=es5-bundled">es5-bundled</a>
 &bull; Debug: <a href="./?js_fast_load=0&css_fast_load=0&strip=0">js_fast_load=0</a>
-<%
-	String currentURL = themeDisplay.getURLCurrent();
-%>
+
 <%--<base href="<%=currentURL%>"/>--%>
 <%--<j sp:include page="/polymer3-demo/build/${ jsProfile }/index.html" flush="true" />--%>
 <%--<j sp:include page="/polymer3-demo/build/<%= jsProfile %>/index.html" flush="true" />--%>
 
-<% if("esm-unbundled".equals(jsProfile) ) { %>1
-<jsp:include page="/polymer3-demo/build/esm-unbundled/index.html" />
-<% }%>
-<% if("esm-bundled".equals(jsProfile) ) { %>2
-<jsp:include page="/polymer3-demo/build/esm-bundled/index.html" />
-<% }%>
-<% if("es6-bundled".equals(jsProfile) ) { %>3
-<jsp:include page="/polymer3-demo/build/es6-bundled/index.html" />
-<% }%>
-<% if("es5-bundled".equals(jsProfile) ) { %>4
-<jsp:include page="/polymer3-demo/build/es5-bundled/index.html" />
-<% }%>
-<%--<base href="<%=currentURL%>"/>--%>
+<% if("esm-unbundled".equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/esm-unbundled/index.html" /><% }%>
+<% if("esm-bundled"  .equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/esm-bundled/index.html"   /><% }%>
+<% if("es6-bundled"  .equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/es6-bundled/index.html"   /><% }%>
+<% if("es5-bundled"  .equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/es5-bundled/index.html"   /><% }%>
 
-<%--<jsp:include page="/polymer3-demo/build/es6-bundled/index.html" />--%>
+<polymer3-demo-app root-path="<%= request.getContextPath() %>/polymer3-demo/"></polymer3-demo-app>

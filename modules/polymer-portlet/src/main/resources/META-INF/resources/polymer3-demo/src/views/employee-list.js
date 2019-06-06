@@ -24,7 +24,7 @@ class EmployeeList extends PolymerElement {
         }
       </style>
 
-      <iron-ajax auto url="employees.json" handle-as="json" last-response="{{_employees}}"></iron-ajax>
+      <iron-ajax auto url="[[rootPath]]employees.json" handle-as="json" last-response="{{_employees}}"></iron-ajax>
 
       <div class="card">
         <vaadin-grid items="[[_employees]]">
@@ -47,6 +47,10 @@ class EmployeeList extends PolymerElement {
         value: () => []
       }
     };
+  }
+  ready() {
+    super.ready();
+    this.set('rootPath', this.getRootNode().host.rootPath );
   }
 }
 
