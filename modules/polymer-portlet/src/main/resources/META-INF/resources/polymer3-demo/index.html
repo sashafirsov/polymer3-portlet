@@ -1,20 +1,3 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>polymer3-demo</title>
-
-    <!--
-      The purpose of this HTML is to give the entry for compilation and serve only JS,
-      Actual UI tags would be used by JSP which along with tag will serve component instance data as html attribute.
-      See the bottom of ../view.jsp
-
-      For development use http://127.0.0.1:8081/index-develop.html
-      which has all parts of page (stripped off here) and instantiates <polymer3-demo-app> component.
-
-      The `<base>` tag below and JS URLs will be recompiled by build.sh
-      The tag is going to be removed and JS will be served with URL reset in build.sh
-      i.e. /o/polymer-portlet/polymer3-demo/build/$1/
-    -->
     <base href="/">
 
     <script>
@@ -39,13 +22,3 @@
          downloading it while the app shell is being parsed and rendered).
          Check the app shell's ready() method to see how the routing is initialized. -->
     <script type="module" src="./src/routes/app-routing.js"></script>
-  </head>
-  <body>
-    <!--
-      Commenting out <polymer3-demo-app></polymer3-demo-app>.
-    -->
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
-  </body>
-</html>

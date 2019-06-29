@@ -17,6 +17,7 @@
   "extraDependencies": [
     "manifest.json",
     "node_modules/@webcomponents/webcomponentsjs/**",
+    "node_modules/@babel/polyfill/dist/**",
     "node_modules/mock-http-request/**",
     "employees.json"
   ],

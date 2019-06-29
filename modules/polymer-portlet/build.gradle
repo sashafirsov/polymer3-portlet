@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 dependencies {
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "2.0.0"
@@ -5,4 +7,37 @@ dependencies {
 	compileOnly group: "javax.servlet", name: "javax.servlet-api", version: "3.0.1"
 	compileOnly group: "jstl", name: "jstl", version: "1.2"
 	compileOnly group: "org.osgi", name: "osgi.cmpn", version: "6.0.0"
+}
+
+def npm = (Os.isFamily(Os.FAMILY_WINDOWS)) ? 'npm.cmd' : 'npm'
+def workDirStr = 'src/main/resources/META-INF/resources/polymer3-demo'
+
+task npmClean_polymer( type: Delete ){
+	delete workDirStr+'/node_modules'
+	delete workDirStr+'/build'
+}
+
+task npmInstall_polymer( type: Exec ){
+	def folder = new File( workDirStr+'/node_modules/@polymer' )
+	workingDir workDirStr
+	if( folder.isDirectory() )
+		commandLine 'echo', 'skipping npm install'
+	else
+		commandLine npm, 'install', '--no-optional'
+}
+
+task npmBuild( type: Exec ){
+	workingDir workDirStr
+	commandLine npm, 'run', 'build'
+}
+processResources{
+	dependsOn npmInstall_polymer
+}
+
+clean{
+	dependsOn npmClean_polymer
+}
+
+jar{
+	dependsOn npmBuild
 }

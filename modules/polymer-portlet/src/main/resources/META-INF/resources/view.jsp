@@ -28,7 +28,6 @@
 	boolean themeJsFastLoad = themeDisplay.isThemeJsFastLoad();// SessionParamUtil.getBoolean( request, "js_fast_load", false );
 	if( !themeJsFastLoad && hasModule && hasWebComponent )
 		jsProfile = "esm-unbundled";
-//	HttpServletRequest sr = PortalUtil.getHttpServletRequest( themeDisplay.getportletRequest);
 	String jsBundle = ParamUtil.getString(PortalUtil.getOriginalServletRequest(request), "jsBundle");
 	if( null!= jsBundle && jsBundle.length()>0 )
 		jsProfile = jsBundle;
@@ -54,6 +53,8 @@ Selected bundle: <b><%=jsProfile%></b>
 <%--<base href="<%=currentURL%>"/>--%>
 <%--<j sp:include page="/polymer3-demo/build/${ jsProfile }/index.html" flush="true" />--%>
 <%--<j sp:include page="/polymer3-demo/build/<%= jsProfile %>/index.html" flush="true" />--%>
+
+<% if( !hasModule ) { %><script src="<%=request.getContextPath()%>/polymer3-demo/build/<%=jsProfile%>/node_modules/@babel/polyfill/dist/polyfill.min.js"></script><% }%>
 
 <% if("esm-unbundled".equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/esm-unbundled/index.html" /><% }%>
 <% if("esm-bundled"  .equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/esm-bundled/index.html"   /><% }%>
