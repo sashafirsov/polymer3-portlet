@@ -30,7 +30,7 @@ task npmBuild( type: Exec ){
 	workingDir workDirStr
 	commandLine npm, 'run', 'build'
 }
-processResources{
+npmBuild{
 	dependsOn npmInstall_polymer
 }
 
@@ -38,6 +38,6 @@ clean{
 	dependsOn npmClean_polymer
 }
 
-jar{
+processResources{
 	dependsOn npmBuild
 }
