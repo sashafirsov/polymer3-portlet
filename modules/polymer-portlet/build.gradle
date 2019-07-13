@@ -35,9 +35,9 @@ npmBuild{
 }
 
 clean{
-	dependsOn npmClean_polymer
+//	dependsOn npmClean_polymer
 }
 
 processResources{
-	dependsOn npmBuild
+//	dependsOn npmBuild
 }

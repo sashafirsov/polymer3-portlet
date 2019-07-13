@@ -11,6 +11,7 @@ applyRootPath(){
     replacef "/[\'\"]service-worker.js[\'\"]/g" "'${rootPath}service-worker.js'" $indexHtml
     replacef "/src\=\"\.\//g" "src=\"${rootPath}"                                $indexHtml
     replacef "/define\(\[\'\.\//g" "define(['${rootPath}"                        $indexHtml
+    replacef "/document\.write(\(.*?\))/g" " "                                   $indexHtml
 }
 
 for D in ./build/*; do

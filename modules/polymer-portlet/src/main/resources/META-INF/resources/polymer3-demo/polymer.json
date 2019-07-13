@@ -58,7 +58,7 @@
         "minify": false
       },
       "bundle": false,
-      "addServiceWorker": true
+      "addServiceWorker": false
     },
     {
       "name": "es6-bundled",

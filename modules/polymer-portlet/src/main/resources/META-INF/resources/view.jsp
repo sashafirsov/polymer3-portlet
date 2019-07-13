@@ -21,7 +21,7 @@
 						|| (  version >= 63   && BrowserSnifferUtil.isFirefox	(request) )
 						|| (  version >= 67   && BrowserSnifferUtil.isChrome	(request) )
 						|| (  version >= 12.1 && BrowserSnifferUtil.isSafari	(request) )
-						|| (  version >= 58  && BrowserSnifferUtil.isOpera		(request) )
+						|| (  version >= 58   && BrowserSnifferUtil.isOpera		(request) )
 			;
 	String jsProfile = (hasModule && hasWebComponent) ? "esm-bundled" : hasWebComponent? "es6-bundled": "es5-bundled";
 
@@ -64,10 +64,10 @@ Selected bundle: <b><%=jsProfile%></b>
 	<script>
 		$( function()
 		{	$( 'script[type="module"]' ).each( function(n,el)
-			{	el.injected || $('<script type="module"><'+'/script>')
+			{	el.injected || $('<'+'script type="module"><'+'/script>')
 								.prop('injected', el.injected =1 )
 								.attr('src', el.src )
-								.insertAfter( 'body' );
+								.insertAfter( el );
 			});
 		});
 	</script>
