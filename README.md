@@ -13,4 +13,7 @@ In IntelliJ it is available in "Liferay" context menu on project level.
 * run gradle `deploy` task
 * run portal and insert into page `Polymer demo portlet` 
 
+# Links
 [Blog on design of this project](https://blog.firsov.net/2019/06/liferay-polymer-integration.html)
+
+[Liferay Cheat Sheet](liferay-7-cheat-sheet.md)

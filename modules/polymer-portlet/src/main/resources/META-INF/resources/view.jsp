@@ -32,7 +32,6 @@
 	if( null!= jsBundle && jsBundle.length()>0 )
 		jsProfile = jsBundle;
 
-
 %>
 
 <script src="<%= request.getContextPath() %>/js/main.js" type="text/javascript"></script>
@@ -60,5 +59,18 @@ Selected bundle: <b><%=jsProfile%></b>
 <% if("esm-bundled"  .equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/esm-bundled/index.html"   /><% }%>
 <% if("es6-bundled"  .equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/es6-bundled/index.html"   /><% }%>
 <% if("es5-bundled"  .equals(jsProfile) ) { %><jsp:include page="/polymer3-demo/build/es5-bundled/index.html"   /><% }%>
+
+<% if( hasModule ) { %>
+	<script>
+		$( function()
+		{	$( 'script[type="module"]' ).each( function(n,el)
+			{	el.injected || $('<script type="module"><'+'/script>')
+								.prop('injected', el.injected =1 )
+								.attr('src', el.src )
+								.insertAfter( 'body' );
+			});
+		});
+	</script>
+<% }%>
 
 <polymer3-demo-app root-path="<%= request.getContextPath() %>/polymer3-demo/"></polymer3-demo-app>
