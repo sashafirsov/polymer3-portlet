@@ -30,6 +30,10 @@
   },
   "devDependencies": {
     "@polymer/test-fixture": "^4.0.0",
+    "estree-walker": "^1.0.1",
+    "glob": "^7.1.6",
+    "magic-string": "^0.25.6",
+    "read-pkg": "^5.2.0",
     "replace-in-file": "^4.1.0",
     "wct-browser-legacy": "^1.0.1"
   },

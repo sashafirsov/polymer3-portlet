@@ -21,3 +21,4 @@ for D in ./build/*; do
 done
 
 cp node_modules/@babel/polyfill/dist/polyfill.min.js "build/es5-bundled/node_modules/@babel/polyfill/dist/"
+node cdnRootUrl.js
