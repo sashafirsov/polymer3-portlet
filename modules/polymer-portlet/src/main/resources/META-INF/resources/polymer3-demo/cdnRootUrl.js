@@ -10,29 +10,40 @@ const readJson = fName => JSON.parse( fs.readFileSync(fName) );
 const builds = readJson('polymer.json' ).builds || [];
 const deps = readJson('package-lock.json' ).dependencies || [];
 const mod2url = {};
+
 builds.filter( b=>b.cdnRootUrl ).map( build =>
 {
-    Object.keys(deps).forEach( mod =>
-    {
-        const path = `build/${build.name}/node_modules/${mod}`;
+    const forEachMod = cb => Object.keys(deps).forEach( mod =>
+    { const path = `build/${build.name}/node_modules/${mod}`;
         if( !isDirectory(path) )
             return;
-        const dstPath = `${path}@${deps[mod].version}`;
-        const modUrl = u => u && `${u}/${mod}@${deps[mod].version}`;
-        const url = modUrl( build.cdnRootUrl[mod] ) || modUrl(build.basePath ) || modUrl('./node_modules');
-        mod2url[ mod ] = url;
-        console.log(mod+' | '+dstPath+' <> '+url);
+        cb( mod, path )
+    });
 
-    });
-return;
-    const files = glob.sync( `build/${build.name}/node_modules/**/*` );
-    files.map( f =>
+    forEachMod( (mod, path) =>
     {
-        if( isDirectory(f) )
-            console.log( f +"/");
-        else
-            console.log( f );
+        const modUrl = u => u && `${u}/${mod}@${deps[mod].version}/`;
+        const url = modUrl( build.cdnRootUrl[mod] ) || modUrl(build.basePath ) || modUrl('./node_modules');
+        mod2url[ mod ] = {url:url, path:`${path}@${deps[mod].version}` };
     });
+    forEachMod( (mod, dir) =>
+    {
+        const dstPath = mod2url[mod].path;
+        const modUrl = mod2url[mod].url;
+        // console.log(mod+' | '+dstPath+' <> '+modUrl);
+        const files = glob.sync( `${dir}/**/*` );
+        files.map( f =>copyMap(mod,f)  );
+    });
+
+
+    // const files = glob.sync( `build/${build.name}/node_modules/**/*` );
+    // files.map( f =>
+    // {
+    //     if( isDirectory(f) )
+    //         console.log( f +"/");
+    //     else
+    //         console.log( f );
+    // });
     // const modulesPath = `build/${build.name}/node_modules`;
     // fs.readdir( modulesPath, ( err, files )=>
     // {   files.filter( f=>build.cdnRootUrl[f] ).map( f=>
@@ -42,10 +53,17 @@ return;
     //         console.log( f );
     //     });
     // });
-
-
 });
+function copyMap(mod, file)
+{
+    const dstPath = mod2url[mod].path;
 
+    if( isDirectory( file ) )
+    {   console.log( "+"+dstPath );
+        return isDirectory( dstPath ) || fs.mkdirSync(dstPath);
+    }
+    console.log( '~'+file)
+}
 // const transform = (mod, version) => `${mod}@${version}` ;
 
 const pkg = readPkg.sync(); //  let obj = ;
