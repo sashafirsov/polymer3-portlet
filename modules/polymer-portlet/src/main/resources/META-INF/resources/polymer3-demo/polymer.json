@@ -58,10 +58,7 @@
         "minify": false
       },
       "bundle": false,
-      "addServiceWorker": false,
-      "cdnRootUrl":{
-        "@polymer":"/polymer/esm-unbundled"
-      }
+      "addServiceWorker": false
     },
     {
       "name": "es6-bundled",
