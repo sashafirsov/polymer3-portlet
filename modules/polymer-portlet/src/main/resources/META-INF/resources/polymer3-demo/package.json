@@ -1,6 +1,6 @@
 {
   "name": "polymer3-demo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
@@ -36,6 +36,7 @@
     "magic-string": "^0.25.6",
     "read-pkg": "^5.2.0",
     "replace-in-file": "^4.1.0",
+    "rimraf": "^3.0.2",
     "wct-browser-legacy": "^1.0.1"
   },
   "resolutions": {

@@ -20,22 +20,25 @@ const importmap =
    *
    * "domain" is used as name of subfolder in dist/ and could be used for deployment
    */
-    [   {   from:  /node_modules\/(\w+)\/(\w+)\//       // i.e. @polymer/iron-ajax/
+    [   {   from:  /node_modules\/(.+)\/(.+)\//         // i.e. @polymer/iron-ajax/
         ,   to : "/${buildName}/$1/$2@${version}/"      // i.e. /esm-unbundled/@polymer/app-layout@3.1.0
         ,   domain: "cdn.xml4jquery.com"                // output files will reside in build/cdn.xml4jquery.com
         }
-    ,   {   from:   /node_modules\/(\\w+)\//            // modules without org, like lodash/
+    ,   {   from:   /node_modules\/(.+)\//              // modules without org, like lodash/
         ,   to:     "/${buildName}/$1@${version}/"      //    /esm-unbundled/lodash@4.17.15/
         ,   domain: "cdn.xml4jquery.com"
         }
+    ,   {   from:  /(.+)\//         // everything else
+        ,   to : "/${buildName}/"   // i.e. /esm-unbundled/
+//      ,   to : "/${buildName}/{packageName}@{version}/"   // i.e. /esm-unbundled/@foo/polymer3-demo@0.1.0/
+        ,   domain: "default"       // default name for domain
+        }
     ,   {  from:    /node_modules\/@foo\/(.*\.)([^\/]+)/    // @foo module files
         ,   to :    "/${buildName}/@foo/$1.${hash}.$2"      // /esm-unbundled/@foo/main.3e6484ae5a646bd7c625 .js
-        ,   domain: "foo.io"
         } // @foo does not use version and all its files are using hash instead
     ,   {   from:  /(.+)/           // everything else. "default" is
         ,   to : "/${buildName}/"   // i.e. /esm-unbundled/
 //      ,   to : "/${buildName}/{packageName}@{version}/"   // i.e. /esm-unbundled/@foo/polymer3-demo@0.1.0/
-        ,   domain: "default"       // is not really necessary default name for domain is a "default"
         }
     ]
     // scopes: TBD
